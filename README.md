@@ -2,7 +2,7 @@ QuickEd
 &nbsp;
 [![Release](https://img.shields.io/github/release/maxdoblas/quicked.svg)](https://github.com/maxdoblas/quicked/releases/latest)
 [![CI](https://img.shields.io/github/actions/workflow/status/maxdoblas/quicked/build_and_test.yaml)](https://github.com/maxdoblas/QuickEd/actions/workflows/build_and_test.yaml)
-[![Publication](https://img.shields.io/badge/Published%20in-BioRxiv-167DA4.svg)](https://doi.org/10.1101/2024.09.13.612714)
+[![Publication](https://img.shields.io/badge/Published%20in-Bioinformatics-167DA4.svg)](https://doi.org/10.1093/bioinformatics/btaf112)
 =====
 
 QuickEd is a high-performance exact sequence alignment based on the bound-and-align paradigm.
@@ -281,3 +281,7 @@ make
 
 > [!WARNING]
 > ASAN and UBSAN could fail when executing the Python binding. This is known behavior.
+
+## CITATION
+**Max Doblas, Oscar Lostes-Cazorla, Quim Aguado-Puig, Cristian Iñiguez, Miquel Moreto, Santiago Marco-Sola**. ["QuickEd: High-performance exact sequence alignment based on bound-and-align"](https://doi.org/10.1093/bioinformatics/btaf112
+). Bioinformatics, 2025.
