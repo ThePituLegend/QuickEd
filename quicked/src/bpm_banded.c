@@ -121,16 +121,19 @@ void banded_matrix_allocate(
     const int64_t k_end = ABS(((int64_t)text_length) - (int64_t)(pattern_length)) + 1;
     banded_matrix->cutoff_score = MAX(MAX(k_end, cutoff_score), 65);
     banded_matrix->sequence_length_diff = pattern_length - text_length;
-    banded_matrix->relative_cutoff_score = DIV_CEIL((banded_matrix->cutoff_score - ABS(banded_matrix->sequence_length_diff)), 2);
+    banded_matrix->relative_cutoff_score = (banded_matrix->cutoff_score - ABS(banded_matrix->sequence_length_diff)) == 0LL ? 0LL : 
+                                            DIV_CEIL((banded_matrix->cutoff_score - ABS(banded_matrix->sequence_length_diff)), 2);
+    const int64_t relative_cutoff_score_blocks = banded_matrix->relative_cutoff_score == 0LL ? 0LL : DIV_CEIL(banded_matrix->relative_cutoff_score, BPM_W64_LENGTH);
     if (banded_matrix->sequence_length_diff >= 0)
     {
-        banded_matrix->prolog_column_blocks = DIV_CEIL(banded_matrix->relative_cutoff_score, BPM_W64_LENGTH);
+        banded_matrix->prolog_column_blocks = relative_cutoff_score_blocks;
         banded_matrix->effective_bandwidth_blocks = DIV_CEIL(banded_matrix->relative_cutoff_score + banded_matrix->sequence_length_diff, BPM_W64_LENGTH) + 1 + banded_matrix->prolog_column_blocks;
     }
     else
     {
-        banded_matrix->prolog_column_blocks = DIV_CEIL(banded_matrix->relative_cutoff_score - banded_matrix->sequence_length_diff, BPM_W64_LENGTH);
-        banded_matrix->effective_bandwidth_blocks = DIV_CEIL(banded_matrix->relative_cutoff_score, BPM_W64_LENGTH) + 1 + banded_matrix->prolog_column_blocks;
+        banded_matrix->prolog_column_blocks = banded_matrix->relative_cutoff_score - banded_matrix->sequence_length_diff == 0LL ? 0LL : 
+                                                DIV_CEIL(banded_matrix->relative_cutoff_score - banded_matrix->sequence_length_diff, BPM_W64_LENGTH);
+        banded_matrix->effective_bandwidth_blocks = relative_cutoff_score_blocks + 1 + banded_matrix->prolog_column_blocks;
     }
     banded_matrix->effective_bandwidth = banded_matrix->cutoff_score;
 
@@ -157,7 +160,7 @@ void banded_matrix_allocate(
         Pv = (uint64_t *)mm_allocator_malloc(mm_allocator, aux_matrix_size);
         Mv = (uint64_t *)mm_allocator_malloc(mm_allocator, aux_matrix_size);
     }
-    int64_t *const scores = (int64_t *)mm_allocator_malloc(mm_allocator, (DIV_CEIL(pattern_length, BPM_W64_LENGTH) + num_words64 / 2) * UINT64_SIZE);
+    int64_t *const scores = (int64_t *)mm_allocator_malloc(mm_allocator, MAX((DIV_CEIL(pattern_length, BPM_W64_LENGTH) + num_words64 / 2), banded_matrix->effective_bandwidth_blocks) * UINT64_SIZE);
     banded_matrix->Mv = Mv;
     banded_matrix->Pv = Pv;
     banded_matrix->scores = scores;

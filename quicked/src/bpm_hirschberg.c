@@ -100,8 +100,8 @@ quicked_status_t bpm_compute_matrix_hirschberg(
             text_length, text_len_r, SCORE_ONLY, force_scalar);
 
         // vertival position of the first blocks computed on each aligments
-        int64_t first_block_band_pos_v = text_len < prolog_column_blocks * BPM_W64_LENGTH ? 0 : (text_len / BPM_W64_LENGTH) - (prolog_column_blocks);
-        int64_t first_block_band_pos_v_r = text_len_r < prolog_column_blocks * BPM_W64_LENGTH ? 0 : (text_len_r / BPM_W64_LENGTH) - (prolog_column_blocks);
+        int64_t first_block_band_pos_v = (text_len / BPM_W64_LENGTH) - (banded_matrix.prolog_column_blocks);
+        int64_t first_block_band_pos_v_r = (text_len_r / BPM_W64_LENGTH) - (banded_matrix.prolog_column_blocks);
 
         // Higher and lower cell's position computen in each aligments
         int64_t bottom_cell;

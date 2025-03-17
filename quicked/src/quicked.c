@@ -317,6 +317,7 @@ quicked_params_t quicked_default_params(void)
         .overlap_size = 1,
         .force_scalar = false,
         .external_timer = false,
+        .external_allocator = NULL,
     };
 }
 
