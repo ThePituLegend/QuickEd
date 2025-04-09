@@ -1,0 +1,28 @@
+[build-system]
+requires = ["scikit-build-core==0.11"]
+build-backend = "scikit_build_core.build"
+
+[tool.scikit-build]
+build.verbose = true
+logging.level = "INFO"
+build.targets = ["pyquicked"]
+
+[project]
+name = "QuickEd"
+description = "Python bindings for QuickEd"
+# readme = { file = "PYTHON.md", content-type = "text/markdown" }
+authors = [
+    {name = "Max Doblas", email = "max.doblas@bsc.es"},
+    {name = "Oscar Lostes-Cazorla", email = "oscar.lostes@bsc.es"},
+    {name = "Cristian Iniguez", email = "cristian.iniguez@bsc.es"},
+    {name = "Santiago Marco-Sola", email = "santiagomsola@gmail.com"},
+]
+maintainers = [
+  { name = "Oscar Lostes-Cazorla", email = "oscar.lostes@bsc.es" },
+]
+license = "MIT"
+version = "1.1"
+requires-python = ">=3.10"
+
+[project.urls]
+Homepage = "https://github.com/maxdoblas/QuickEd"

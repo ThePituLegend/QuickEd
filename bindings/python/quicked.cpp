@@ -27,7 +27,7 @@
 
 namespace py = pybind11;
 namespace quicked {
-    PYBIND11_MODULE(pyquicked, m) {
+    PYBIND11_MODULE(quicked, m) {
         m.doc() = "QuickEd Library";
 
     py::class_<QuickedAligner>(m, "QuickedAligner")

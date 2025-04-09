@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.20...3.22.1)
 
 project(quicked LANGUAGES C CXX)
 set(CMAKE_C_STANDARD 11)
