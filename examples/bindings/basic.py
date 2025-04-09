@@ -22,7 +22,7 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #  SOFTWARE.
 
-from pyquicked import QuickedAligner, QuickedException
+from quicked import QuickedAligner, QuickedException
 
 pattern = "ACGT" # Pattern sequence
 text = "ACTT"    # Text sequence
@@ -37,9 +37,9 @@ try:
 
     score = aligner.getScore()    # Get the score
     cigar = aligner.getCigar()    # Get the CIGAR string
-except QuickedEception as e:
+except QuickedException as e:
     print(e)
 
 print(f"Score: {score}") # Print the score
-print(f"Cigar: {cigar}")  # Print the CIGAR string
+print(f"Cigar: {cigar}") # Print the CIGAR string
 
